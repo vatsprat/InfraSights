@@ -280,9 +280,9 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ## 📬 Contact
 
-**Your Name** — [@yourtwitter](https://twitter.com/yourtwitter)
+**Your Name** — [Linkedin](https://www.linkedin.com/in/pratyush-vats-75a318200/)
 
-Project Link: [https://github.com/yourusername/cloudcost-ai](https://github.com/yourusername/cloudcost-ai)
+Project Link: [https://github.com/vatsprat/InfraSights](https://github.com/vatsprat/InfraSights)
 
 ---
 
