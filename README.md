@@ -7,7 +7,7 @@ InfraSights is an AI-powered cloud architecture analyzer. It uses Google's Gemin
 <img width="1033" height="853" alt="Screenshot 2025-12-13 005342" src="https://github.com/user-attachments/assets/71c55e95-ba24-412c-8073-a9f138c6630b" />
 
 ### Demo Video
-> [📹 Watch 2-minute demo](https://www.youtube.com/watch?v=ozt8mnItR_M)
+> [📹 Watch 2-minute demo](https://www.youtube.com/watch?v=ozt8mnItR_M).
 
 ## ✨ Key Features
 
