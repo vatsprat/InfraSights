@@ -4,7 +4,10 @@
 
 InfraSights is an AI-powered cloud architecture analyzer. It uses Google's Gemini 3 Pro model to visually parse architecture diagrams, identify services, ask clarifying questions about traffic and usage, and generate professional cost estimates with optimization recommendations.
 
-![InfraSights Preview](https://youtu.be/ozt8mnItR_M)
+<img width="1033" height="853" alt="Screenshot 2025-12-13 005342" src="https://github.com/user-attachments/assets/71c55e95-ba24-412c-8073-a9f138c6630b" />
+
+### Demo Video
+> [📹 Watch 2-minute demo](https://www.youtube.com/watch?v=ozt8mnItR_M)
 
 ## ✨ Key Features
 
@@ -77,6 +80,12 @@ InfraSights is an AI-powered cloud architecture analyzer. It uses Google's Gemin
    - Read the Executive Summary.
    - Review high-impact Recommendations to save money.
    - Check the detailed breakdown table and charts.
+
+## 📬 Contact
+- **Pratyush Vats** — [Linkedin](https://www.linkedin.com/in/pratyush-vats-75a318200/)
+- **Divyansh Joshi** — [Linkedin](https://www.linkedin.com/in/divyansh-joshi-053691222/)
+
+Project Link: [https://github.com/vatsprat/InfraSights](https://github.com/vatsprat/InfraSights)
 
 ## 📂 Project Structure
 
