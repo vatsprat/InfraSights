@@ -19,7 +19,8 @@ import {
   TrendingDown,
   Info,
   ScanEye,
-  Sparkles
+  Sparkles,
+  Download
 } from 'lucide-react';
 import { analyzeArchitecture, generateCostReport } from './services/geminiService';
 import { AppStage, AnalysisResult, CostReport } from './types';
@@ -45,16 +46,61 @@ const App = () => {
   const [showAnalysisDetails, setShowAnalysisDetails] = useState(false);
   
   const [costReport, setCostReport] = useState<CostReport | null>(null);
+  const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
 
   const activeRequestRef = useRef(false);
 
+  // Helper function to convert SVG to PNG
+  const convertSvgToPng = (svgDataUrl: string): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width || 1200;
+        canvas.height = img.height || 900;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.fillStyle = 'white';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+          resolve(canvas.toDataURL('image/png'));
+        } else {
+          reject(new Error('Could not get canvas context'));
+        }
+      };
+      img.onerror = () => reject(new Error('Failed to load SVG'));
+      img.src = svgDataUrl;
+    });
+  };
+
   // Handlers
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      setSelectedFile(file);
       const reader = new FileReader();
-      reader.onloadend = () => setImagePreview(reader.result as string);
+
+      reader.onloadend = async () => {
+        const dataUrl = reader.result as string;
+
+        // If it's an SVG, convert to PNG for Gemini API compatibility
+        if (file.type === 'image/svg+xml') {
+          try {
+            const pngDataUrl = await convertSvgToPng(dataUrl);
+            // Create a new File object from PNG data
+            const blob = await fetch(pngDataUrl).then(r => r.blob());
+            const pngFile = new File([blob], file.name.replace('.svg', '.png'), { type: 'image/png' });
+            setSelectedFile(pngFile);
+            setImagePreview(pngDataUrl);
+          } catch (error) {
+            console.error('SVG conversion error:', error);
+            alert('Failed to convert SVG. Please try a PNG or JPG file.');
+          }
+        } else {
+          setSelectedFile(file);
+          setImagePreview(dataUrl);
+        }
+      };
+
       reader.readAsDataURL(file);
     }
   };
@@ -107,7 +153,7 @@ const App = () => {
 
     try {
       const report = await generateCostReport(analysisResult, userAnswers);
-      
+
       if (activeRequestRef.current) {
         setCostReport(report);
         setStage(AppStage.REPORT);
@@ -119,6 +165,109 @@ const App = () => {
     } finally {
       if (activeRequestRef.current) setIsLoading(false);
     }
+  };
+
+  const exportMarkdown = () => {
+    if (!costReport || !analysisResult) return;
+
+    const timestamp = new Date().toISOString().split('T')[0];
+    const filename = `infrasights-report-${timestamp}.md`;
+
+    // Generate markdown content
+    const markdown = `# InfraSights Cost Analysis Report
+**Generated:** ${new Date().toLocaleString()}
+
+---
+
+## Architecture Overview
+
+**Cloud Provider:** ${analysisResult.cloud_provider}
+**Architecture Pattern:** ${analysisResult.architecture_pattern}
+**Confidence Score:** ${costReport.confidence_score}
+
+### Detected Components
+
+${analysisResult.components.map((comp, idx) => `${idx + 1}. **${comp.service}** (${comp.type}) - ${comp.count_estimate || 'N/A'} instances
+   - ${comp.notes}`).join('\n')}
+
+### AI Observations
+
+${analysisResult.observations.map(obs => `- ${obs}`).join('\n')}
+
+---
+
+## Cost Estimates
+
+### Summary
+
+| Metric | Amount |
+|--------|--------|
+| **Monthly Cost** | **$${costReport.total_monthly_cost.toLocaleString()}** |
+| **Yearly Cost** | **$${costReport.total_yearly_cost.toLocaleString()}** |
+| **Optimistic Range** | $${costReport.ranges.optimistic.toLocaleString()} |
+| **Peak Load Range** | $${costReport.ranges.pessimistic.toLocaleString()} |
+
+### Clarifying Questions & Answers
+
+${analysisResult.questions.map((q, idx) => `**Q${idx + 1}:** ${q.text}
+**A:** ${userAnswers[q.id] || 'Not answered'}`).join('\n\n')}
+
+---
+
+## Service-by-Service Breakdown
+
+| Service | Configuration | Monthly Cost | Notes |
+|---------|--------------|--------------|-------|
+${costReport.items.map(item => `| ${item.service} | ${item.configuration} | $${item.monthly_cost.toLocaleString()} | ${item.calculation_note || '-'} |`).join('\n')}
+
+**Total:** $${costReport.total_monthly_cost.toLocaleString()}/month
+
+---
+
+## Executive Summary
+
+${costReport.executive_summary}
+
+---
+
+## Optimization Recommendations
+
+${costReport.recommendations.map((rec, idx) => `### ${idx + 1}. ${rec.title}
+
+**Impact:** ${rec.impact}
+**Estimated Savings:** ${rec.estimated_savings}
+
+${rec.description}
+
+---`).join('\n')}
+
+## Disclaimer
+
+This estimate is based on 2024 public cloud pricing and the information provided. Actual costs may vary based on:
+- Enterprise agreements and volume discounts
+- Spot instance pricing fluctuations
+- Data egress and cross-region transfer costs
+- Support plan tiers
+- Reserved instance commitments
+- Seasonal traffic variations
+
+**Always validate with official cloud provider pricing calculators before making infrastructure decisions.**
+
+---
+
+*Report generated by [InfraSights](https://github.com/yourusername/infrasights) - AI-Powered Cloud Cost Estimator*
+`;
+
+    // Create and trigger download
+    const blob = new Blob([markdown], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   // --- RENDERERS ---
@@ -150,10 +299,10 @@ const App = () => {
         <div className="mb-10">
           <label className="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">1. Architecture Diagram</label>
           <div className={`relative group/upload border-2 border-dashed rounded-2xl p-12 transition-all duration-300 ${imagePreview ? 'border-violet-500/50 bg-zinc-950/80' : 'border-zinc-800 hover:border-violet-500/30 hover:bg-zinc-950/50'}`}>
-            <input 
-              type="file" 
-              accept="image/*" 
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+            <input
+              type="file"
+              accept="image/*,.svg"
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
               onChange={handleFileSelect}
               disabled={isLoading}
             />
@@ -172,7 +321,7 @@ const App = () => {
                   <Upload className="w-10 h-10 text-violet-400" />
                 </div>
                 <p className="font-semibold text-zinc-300 text-xl mb-2">Drop your diagram here</p>
-                <p className="text-sm text-zinc-500">Supports PNG, JPG, WEBP</p>
+                <p className="text-sm text-zinc-500">Supports PNG, JPG, WEBP, SVG</p>
               </div>
             )}
           </div>
@@ -237,7 +386,7 @@ const App = () => {
     
     // Calculate progress
     const totalQuestions = analysisResult.questions.length;
-    const answeredCount = Object.values(userAnswers).filter(a => a.trim() !== '').length;
+    const answeredCount = Object.values(userAnswers).filter((a: string) => a.trim() !== '').length;
     const progress = Math.round((answeredCount / totalQuestions) * 100);
 
     return (
@@ -340,27 +489,48 @@ const App = () => {
                     </div>
                     
                     {q.options && q.options.length > 0 ? (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {q.options.map((opt) => (
-                          <button
-                            key={opt}
-                            onClick={() => setUserAnswers(prev => ({...prev, [q.id]: opt}))}
-                            className={`px-4 py-3.5 rounded-xl text-left text-sm transition-all border relative overflow-hidden group ${
-                              userAnswers[q.id] === opt 
-                              ? 'bg-violet-600/10 border-violet-500 text-white shadow-[0_0_15px_rgba(139,92,246,0.15)]' 
-                              : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200'
-                            }`}
-                          >
-                            <span className="relative z-10 flex items-center justify-between">
-                              {opt}
-                              {userAnswers[q.id] === opt && <CheckCircle2 className="w-4 h-4 text-violet-400" />}
-                            </span>
-                          </button>
-                        ))}
+                      <div className="space-y-4">
+                        {/* Quick Select Options */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {q.options.map((opt) => (
+                            <button
+                              key={opt}
+                              onClick={() => setUserAnswers(prev => ({...prev, [q.id]: opt}))}
+                              className={`px-4 py-3.5 rounded-xl text-left text-sm transition-all border relative overflow-hidden group ${
+                                userAnswers[q.id] === opt
+                                ? 'bg-violet-600/10 border-violet-500 text-white shadow-[0_0_15px_rgba(139,92,246,0.15)]'
+                                : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200'
+                              }`}
+                            >
+                              <span className="relative z-10 flex items-center justify-between">
+                                {opt}
+                                {userAnswers[q.id] === opt && <CheckCircle2 className="w-4 h-4 text-violet-400" />}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Custom Text Input for "Other" */}
+                        <div className="relative">
+                          <label className="text-xs font-medium text-zinc-500 mb-2 block">Or provide a custom answer:</label>
+                          <input
+                            type="text"
+                            value={q.options.includes(userAnswers[q.id] || '') ? '' : (userAnswers[q.id] || '')}
+                            onChange={(e) => setUserAnswers(prev => ({...prev, [q.id]: e.target.value}))}
+                            onFocus={(e) => {
+                              // Clear selection from options when typing custom answer
+                              if (q.options.includes(userAnswers[q.id] || '')) {
+                                setUserAnswers(prev => ({...prev, [q.id]: ''}));
+                              }
+                            }}
+                            placeholder="Type your specific answer here..."
+                            className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3.5 text-zinc-200 focus:border-violet-500 focus:ring-1 focus:ring-violet-500/50 outline-none transition-all placeholder-zinc-600"
+                          />
+                        </div>
                       </div>
                     ) : (
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         value={userAnswers[q.id] || ''}
                         onChange={(e) => setUserAnswers(prev => ({...prev, [q.id]: e.target.value}))}
                         placeholder="e.g. 500GB, 10k daily users..."
@@ -408,15 +578,38 @@ const App = () => {
               Live Estimate
             </div>
           </div>
-          <div className="flex gap-3">
-             <button 
-               onClick={() => { window.print(); }}
-               className="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-lg text-sm font-medium text-zinc-300 transition-colors flex items-center gap-2"
-             >
-               <FileText className="w-4 h-4" /> Export PDF
-             </button>
-             <button 
-               onClick={() => setStage(AppStage.UPLOAD)} 
+          <div className="flex gap-3 relative">
+             <div className="relative">
+               <button
+                 onClick={() => setIsExportMenuOpen(!isExportMenuOpen)}
+                 className={`px-4 py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-lg text-sm font-medium text-zinc-300 transition-colors flex items-center gap-2 ${isExportMenuOpen ? 'bg-zinc-800 border-zinc-600 text-zinc-100' : ''}`}
+               >
+                 <Download className="w-4 h-4" /> Export Report <ChevronDown className={`w-4 h-4 transition-transform ${isExportMenuOpen ? 'rotate-180' : ''}`} />
+               </button>
+               
+               {isExportMenuOpen && (
+                 <>
+                   <div className="fixed inset-0 z-40" onClick={() => setIsExportMenuOpen(false)}></div>
+                   <div className="absolute right-0 top-full mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-xl shadow-xl z-50 overflow-hidden ring-1 ring-white/5 animate-in fade-in zoom-in-95 duration-200">
+                      <button
+                        onClick={() => { exportMarkdown(); setIsExportMenuOpen(false); }}
+                        className="w-full text-left px-4 py-3 hover:bg-zinc-800/50 text-sm text-zinc-300 flex items-center gap-2 transition-colors border-b border-zinc-800/50"
+                      >
+                        <FileText className="w-4 h-4 text-emerald-400" /> Save as Markdown
+                      </button>
+                      <button
+                        onClick={() => { window.print(); setIsExportMenuOpen(false); }}
+                        className="w-full text-left px-4 py-3 hover:bg-zinc-800/50 text-sm text-zinc-300 flex items-center gap-2 transition-colors"
+                      >
+                        <FileText className="w-4 h-4 text-rose-400" /> Print / Save PDF
+                      </button>
+                   </div>
+                 </>
+               )}
+             </div>
+
+             <button
+               onClick={() => { setStage(AppStage.UPLOAD); setIsExportMenuOpen(false); }}
                className="px-4 py-2 bg-zinc-100 hover:bg-white text-zinc-900 rounded-lg text-sm font-bold transition-colors shadow-lg shadow-white/5"
              >
                New Analysis

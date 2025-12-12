@@ -1,0 +1,75 @@
+<svg width="700" height="500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font: bold 22px sans-serif; fill: #232F3E; }
+      .label { font: 14px sans-serif; fill: #232F3E; }
+      .sublabel { font: 11px sans-serif; fill: #666; }
+      .compute { fill: #FF9900; stroke: #232F3E; stroke-width: 2; }
+      .database { fill: #527FFF; stroke: #232F3E; stroke-width: 2; }
+      .storage { fill: #569A31; stroke: #232F3E; stroke-width: 2; }
+      .network { fill: #8C4FFF; stroke: #232F3E; stroke-width: 2; }
+      .arrow { stroke: #232F3E; stroke-width: 2; fill: none; marker-end: url(#arrow5); }
+    </style>
+    <marker id="arrow5" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#232F3E" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="350" y="40" class="title" text-anchor="middle">MVP Startup - Internal Tool (AWS)</text>
+
+  <!-- Users -->
+  <circle cx="80" cy="200" r="40" fill="#34A853" stroke="#232F3E" stroke-width="2"/>
+  <text x="80" y="200" class="label" text-anchor="middle" fill="white">Internal</text>
+  <text x="80" y="220" class="sublabel" text-anchor="middle" fill="white">Team (20)</text>
+
+  <!-- Route 53 -->
+  <rect x="200" y="80" width="120" height="50" rx="5" class="network"/>
+  <text x="260" y="100" class="label" text-anchor="middle" fill="white">Route 53</text>
+  <text x="260" y="118" class="sublabel" text-anchor="middle" fill="white">DNS</text>
+
+  <!-- Single EC2 Instance -->
+  <rect x="200" y="170" width="120" height="90" rx="5" class="compute"/>
+  <text x="260" y="200" class="label" text-anchor="middle" fill="white">EC2 Instance</text>
+  <text x="260" y="220" class="sublabel" text-anchor="middle" fill="white">t3.small</text>
+  <text x="260" y="235" class="sublabel" text-anchor="middle" fill="white">Node.js + React</text>
+  <text x="260" y="250" class="sublabel" text-anchor="middle" fill="white">Single AZ</text>
+
+  <!-- RDS PostgreSQL -->
+  <rect x="390" y="170" width="140" height="90" rx="5" class="database"/>
+  <text x="460" y="200" class="label" text-anchor="middle" fill="white">RDS PostgreSQL</text>
+  <text x="460" y="220" class="sublabel" text-anchor="middle" fill="white">db.t3.micro</text>
+  <text x="460" y="235" class="sublabel" text-anchor="middle" fill="white">20GB storage</text>
+  <text x="460" y="250" class="sublabel" text-anchor="middle" fill="white">Single AZ</text>
+
+  <!-- S3 Bucket -->
+  <rect x="390" y="300" width="140" height="70" rx="5" class="storage"/>
+  <text x="460" y="330" class="label" text-anchor="middle" fill="white">S3 Bucket</text>
+  <text x="460" y="350" class="sublabel" text-anchor="middle" fill="white">File uploads</text>
+  <text x="460" y="365" class="sublabel" text-anchor="middle" fill="white">~10GB</text>
+
+  <!-- CloudWatch -->
+  <rect x="200" y="300" width="120" height="70" rx="5" fill="#CD2264" stroke="#232F3E" stroke-width="2"/>
+  <text x="260" y="330" class="label" text-anchor="middle" fill="white">CloudWatch</text>
+  <text x="260" y="350" class="sublabel" text-anchor="middle" fill="white">Basic</text>
+  <text x="260" y="365" class="sublabel" text-anchor="middle" fill="white">Monitoring</text>
+
+  <!-- Arrows -->
+  <path d="M 120 200 L 200 200" class="arrow"/>
+  <path d="M 260 130 L 260 170" class="arrow"/>
+  <path d="M 320 215 L 390 215" class="arrow"/>
+  <path d="M 320 240 L 390 335" class="arrow"/>
+  <path d="M 260 260 L 260 300" class="arrow"/>
+
+  <!-- VPC Border -->
+  <rect x="180" y="150" width="370" height="240" rx="10" fill="none" stroke="#0078D4" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="185" y="175" class="sublabel" fill="#0078D4">VPC (Single AZ)</text>
+
+  <!-- Cost Estimate Box -->
+  <rect x="150" y="420" width="400" height="60" rx="5" fill="#F0F8FF" stroke="#0078D4" stroke-width="2"/>
+  <text x="350" y="445" class="label" text-anchor="middle" fill="#0078D4">Monthly Budget: $50-80</text>
+  <text x="350" y="465" class="sublabel" text-anchor="middle" fill="#666">EC2: $15 | RDS: $20 | S3: $3 | Route53: $1 | Data Transfer: $5-10</text>
+
+  <!-- Context -->
+  <text x="350" y="35" class="sublabel" text-anchor="middle" fill="#34A853">Expected: Low Cost | High Confidence</text>
+</svg>

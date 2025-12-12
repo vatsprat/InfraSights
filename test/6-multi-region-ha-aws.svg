@@ -1,0 +1,153 @@
+<svg width="1100" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font: bold 26px sans-serif; fill: #232F3E; }
+      .region-title { font: bold 16px sans-serif; fill: #FF9900; }
+      .label { font: 12px sans-serif; fill: #232F3E; }
+      .sublabel { font: 10px sans-serif; fill: #666; }
+      .global { fill: #8C4FFF; stroke: #232F3E; stroke-width: 2; }
+      .compute { fill: #FF9900; stroke: #232F3E; stroke-width: 2; }
+      .database { fill: #527FFF; stroke: #232F3E; stroke-width: 2; }
+      .storage { fill: #569A31; stroke: #232F3E; stroke-width: 2; }
+      .cache { fill: #E7157B; stroke: #232F3E; stroke-width: 2; }
+      .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrow6); }
+      .thick-arrow { stroke: #FF9900; stroke-width: 3; fill: none; marker-end: url(#arrow-thick); stroke-dasharray: 5,5; }
+    </style>
+    <marker id="arrow6" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+    <marker id="arrow-thick" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#FF9900" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="550" y="35" class="title" text-anchor="middle">Multi-Region High Availability - Global SaaS (AWS)</text>
+
+  <!-- Global Services -->
+  <rect x="400" y="60" width="300" height="100" rx="8" fill="#F0F8FF" stroke="#0078D4" stroke-width="3"/>
+  <text x="550" y="85" class="region-title" text-anchor="middle">Global Layer</text>
+
+  <rect x="420" y="100" width="120" height="50" rx="5" class="global"/>
+  <text x="480" y="120" class="label" text-anchor="middle" fill="white">Route 53</text>
+  <text x="480" y="135" class="sublabel" text-anchor="middle" fill="white">Geo-routing</text>
+
+  <rect x="560" y="100" width="120" height="50" rx="5" class="global"/>
+  <text x="620" y="120" class="label" text-anchor="middle" fill="white">CloudFront</text>
+  <text x="620" y="135" class="sublabel" text-anchor="middle" fill="white">Global CDN</text>
+
+  <!-- Region 1: US-EAST-1 -->
+  <rect x="50" y="200" width="450" height="270" rx="10" fill="#FFF5E6" stroke="#FF9900" stroke-width="3"/>
+  <text x="275" y="230" class="region-title" text-anchor="middle">Region: US-EAST-1 (Primary)</text>
+
+  <!-- AZ 1a -->
+  <rect x="70" y="250" width="200" height="200" rx="5" fill="#E6F3FF" stroke="#0078D4" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="170" y="270" class="sublabel" text-anchor="middle" fill="#0078D4">AZ: us-east-1a</text>
+
+  <rect x="90" y="285" width="80" height="50" rx="5" class="global"/>
+  <text x="130" y="305" class="label" text-anchor="middle" fill="white">ALB</text>
+  <text x="130" y="320" class="sublabel" text-anchor="middle" fill="white">Primary</text>
+
+  <rect x="90" y="355" width="70" height="70" rx="5" class="compute"/>
+  <text x="125" y="380" class="label" text-anchor="middle" fill="white">EC2 ASG</text>
+  <text x="125" y="395" class="sublabel" text-anchor="middle" fill="white">m5.large</text>
+  <text x="125" y="410" class="sublabel" text-anchor="middle" fill="white">3-10 nodes</text>
+
+  <rect x="180" y="355" width="70" height="70" rx="5" class="cache"/>
+  <text x="215" y="380" class="label" text-anchor="middle" fill="white">ElastiCache</text>
+  <text x="215" y="395" class="sublabel" text-anchor="middle" fill="white">Redis</text>
+  <text x="215" y="410" class="sublabel" text-anchor="middle" fill="white">r6g.large</text>
+
+  <!-- AZ 1b -->
+  <rect x="290" y="250" width="200" height="200" rx="5" fill="#E6F3FF" stroke="#0078D4" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="390" y="270" class="sublabel" text-anchor="middle" fill="#0078D4">AZ: us-east-1b</text>
+
+  <rect x="310" y="285" width="80" height="50" rx="5" class="global"/>
+  <text x="350" y="305" class="label" text-anchor="middle" fill="white">ALB</text>
+  <text x="350" y="320" class="sublabel" text-anchor="middle" fill="white">Standby</text>
+
+  <rect x="310" y="355" width="70" height="70" rx="5" class="compute"/>
+  <text x="345" y="380" class="label" text-anchor="middle" fill="white">EC2 ASG</text>
+  <text x="345" y="395" class="sublabel" text-anchor="middle" fill="white">m5.large</text>
+  <text x="345" y="410" class="sublabel" text-anchor="middle" fill="white">3-10 nodes</text>
+
+  <rect x="400" y="355" width="70" height="70" rx="5" class="cache"/>
+  <text x="435" y="380" class="label" text-anchor="middle" fill="white">ElastiCache</text>
+  <text x="435" y="395" class="sublabel" text-anchor="middle" fill="white">Redis</text>
+  <text x="435" y="410" class="sublabel" text-anchor="middle" fill="white">r6g.large</text>
+
+  <!-- Region 2: EU-WEST-1 -->
+  <rect x="600" y="200" width="450" height="270" rx="10" fill="#F0FFE6" stroke="#569A31" stroke-width="3"/>
+  <text x="825" y="230" class="region-title" text-anchor="middle">Region: EU-WEST-1 (DR)</text>
+
+  <!-- AZ 2a -->
+  <rect x="620" y="250" width="200" height="200" rx="5" fill="#E6F3FF" stroke="#0078D4" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="720" y="270" class="sublabel" text-anchor="middle" fill="#0078D4">AZ: eu-west-1a</text>
+
+  <rect x="640" y="285" width="80" height="50" rx="5" class="global"/>
+  <text x="680" y="305" class="label" text-anchor="middle" fill="white">ALB</text>
+  <text x="680" y="320" class="sublabel" text-anchor="middle" fill="white">DR</text>
+
+  <rect x="640" y="355" width="70" height="70" rx="5" class="compute"/>
+  <text x="675" y="380" class="label" text-anchor="middle" fill="white">EC2 ASG</text>
+  <text x="675" y="395" class="sublabel" text-anchor="middle" fill="white">m5.large</text>
+  <text x="675" y="410" class="sublabel" text-anchor="middle" fill="white">2-6 nodes</text>
+
+  <rect x="730" y="355" width="70" height="70" rx="5" class="cache"/>
+  <text x="765" y="380" class="label" text-anchor="middle" fill="white">ElastiCache</text>
+  <text x="765" y="395" class="sublabel" text-anchor="middle" fill="white">Redis</text>
+  <text x="765" y="410" class="sublabel" text-anchor="middle" fill="white">r6g.large</text>
+
+  <!-- AZ 2b -->
+  <rect x="840" y="250" width="200" height="200" rx="5" fill="#E6F3FF" stroke="#0078D4" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="940" y="270" class="sublabel" text-anchor="middle" fill="#0078D4">AZ: eu-west-1b</text>
+
+  <rect x="860" y="285" width="80" height="50" rx="5" class="global"/>
+  <text x="900" y="305" class="label" text-anchor="middle" fill="white">ALB</text>
+  <text x="900" y="320" class="sublabel" text-anchor="middle" fill="white">DR</text>
+
+  <rect x="860" y="355" width="70" height="70" rx="5" class="compute"/>
+  <text x="895" y="380" class="label" text-anchor="middle" fill="white">EC2 ASG</text>
+  <text x="895" y="395" class="sublabel" text-anchor="middle" fill="white">m5.large</text>
+  <text x="895" y="410" class="sublabel" text-anchor="middle" fill="white">2-6 nodes</text>
+
+  <rect x="950" y="355" width="70" height="70" rx="5" class="cache"/>
+  <text x="985" y="380" class="label" text-anchor="middle" fill="white">ElastiCache</text>
+  <text x="985" y="395" class="sublabel" text-anchor="middle" fill="white">Redis</text>
+  <text x="985" y="410" class="sublabel" text-anchor="middle" fill="white">r6g.large</text>
+
+  <!-- Database Layer -->
+  <rect x="200" y="510" width="700" height="110" rx="8" fill="#E6F3FF" stroke="#527FFF" stroke-width="3"/>
+  <text x="550" y="535" class="region-title" text-anchor="middle" fill="#527FFF">Database Layer</text>
+
+  <rect x="230" y="555" width="180" height="55" rx="5" class="database"/>
+  <text x="320" y="575" class="label" text-anchor="middle" fill="white">RDS Aurora MySQL</text>
+  <text x="320" y="590" class="sublabel" text-anchor="middle" fill="white">Primary: US-EAST-1</text>
+  <text x="320" y="602" class="sublabel" text-anchor="middle" fill="white">db.r6g.2xlarge x3</text>
+
+  <rect x="450" y="555" width="180" height="55" rx="5" class="database"/>
+  <text x="540" y="575" class="label" text-anchor="middle" fill="white">RDS Aurora Read</text>
+  <text x="540" y="590" class="sublabel" text-anchor="middle" fill="white">Replica: EU-WEST-1</text>
+  <text x="540" y="602" class="sublabel" text-anchor="middle" fill="white">db.r6g.2xlarge x2</text>
+
+  <rect x="670" y="555" width="180" height="55" rx="5" class="storage"/>
+  <text x="760" y="575" class="label" text-anchor="middle" fill="white">S3 Cross-Region</text>
+  <text x="760" y="590" class="sublabel" text-anchor="middle" fill="white">Replication</text>
+  <text x="760" y="602" class="sublabel" text-anchor="middle" fill="white">500GB + versioning</text>
+
+  <!-- Arrows from Global -->
+  <path d="M 480 150 L 275 200" class="arrow"/>
+  <path d="M 620 150 L 825 200" class="arrow"/>
+
+  <!-- Cross-Region Replication -->
+  <path d="M 500 390 L 600 390" class="thick-arrow"/>
+
+  <!-- DB Connections -->
+  <path d="M 275 470 L 320 555" class="arrow"/>
+  <path d="M 825 470 L 540 555" class="arrow"/>
+
+  <!-- Context -->
+  <text x="550" y="680" class="label" text-anchor="middle" fill="#232F3E">High Traffic SaaS | 99.99% SLA | 100K concurrent users | Multi-region DR</text>
+  <text x="550" y="710" class="label" text-anchor="middle" fill="#232F3E">Auto-scaling: 10-40 EC2 instances | Aurora Global Database</text>
+  <text x="550" y="750" class="sublabel" text-anchor="middle" fill="#E7157B">Expected Cost: Very High ($8K-15K/mo) | Confidence: Medium (depends on actual traffic patterns)</text>
+</svg>

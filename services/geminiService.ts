@@ -22,7 +22,7 @@ export const analyzeArchitecture = async (
   if (!apiKey) throw new Error("API Key is missing");
 
   const ai = new GoogleGenAI({ apiKey });
-  const model = "gemini-2.5-flash";
+  const model = "gemini-2.5-flash";//Gemini 3 pro quota expired
 
   try {
     const response = await ai.models.generateContent({
@@ -65,7 +65,7 @@ export const generateCostReport = async (
   if (!apiKey) throw new Error("API Key is missing");
 
   const ai = new GoogleGenAI({ apiKey });
-  const model = "gemini-2.5-flash"; // Using flash for speed, could switch to pro for complex math
+  const model = "gemini-2.5-flash"; // Using for complex reasoning and math accuracy (Gemini 3 pro quota expired)
 
   // Format Q&A for the model
   const qaString = analysisResult.questions.map(q => 

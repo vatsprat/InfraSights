@@ -1,0 +1,112 @@
+<svg width="1000" height="700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font: bold 24px sans-serif; fill: #4285F4; }
+      .label { font: 12px sans-serif; fill: #202124; }
+      .sublabel { font: 10px sans-serif; fill: #5F6368; }
+      .compute { fill: #4285F4; stroke: #202124; stroke-width: 2; }
+      .database { fill: #34A853; stroke: #202124; stroke-width: 2; }
+      .messaging { fill: #FBBC04; stroke: #202124; stroke-width: 2; }
+      .storage { fill: #EA4335; stroke: #202124; stroke-width: 2; }
+      .container { fill: #669DF6; stroke: #202124; stroke-width: 2; }
+      .arrow { stroke: #5F6368; stroke-width: 2; fill: none; marker-end: url(#arrow2); }
+    </style>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#5F6368" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="500" y="40" class="title" text-anchor="middle">Microservices E-Commerce Platform - GCP</text>
+
+  <!-- API Gateway -->
+  <rect x="420" y="80" width="160" height="50" rx="5" class="compute"/>
+  <text x="500" y="105" class="label" text-anchor="middle" fill="white">Cloud Load Balancer</text>
+  <text x="500" y="120" class="sublabel" text-anchor="middle" fill="white">API Gateway</text>
+
+  <!-- GKE Cluster Border -->
+  <rect x="80" y="160" width="840" height="280" rx="10" fill="none" stroke="#4285F4" stroke-width="3" stroke-dasharray="10,5"/>
+  <text x="500" y="185" class="label" text-anchor="middle" fill="#4285F4">GKE Cluster (6 nodes - n1-standard-2)</text>
+
+  <!-- User Service -->
+  <rect x="120" y="210" width="120" height="80" rx="5" class="container"/>
+  <text x="180" y="235" class="label" text-anchor="middle" fill="white">User Service</text>
+  <text x="180" y="250" class="sublabel" text-anchor="middle" fill="white">3 pods</text>
+  <text x="180" y="275" class="sublabel" text-anchor="middle" fill="white">Auth/Profile</text>
+
+  <!-- Product Service -->
+  <rect x="270" y="210" width="120" height="80" rx="5" class="container"/>
+  <text x="330" y="235" class="label" text-anchor="middle" fill="white">Product Service</text>
+  <text x="330" y="250" class="sublabel" text-anchor="middle" fill="white">5 pods</text>
+  <text x="330" y="275" class="sublabel" text-anchor="middle" fill="white">Catalog/Search</text>
+
+  <!-- Order Service -->
+  <rect x="420" y="210" width="120" height="80" rx="5" class="container"/>
+  <text x="480" y="235" class="label" text-anchor="middle" fill="white">Order Service</text>
+  <text x="480" y="250" class="sublabel" text-anchor="middle" fill="white">4 pods</text>
+  <text x="480" y="275" class="sublabel" text-anchor="middle" fill="white">Checkout/Cart</text>
+
+  <!-- Payment Service -->
+  <rect x="570" y="210" width="120" height="80" rx="5" class="container"/>
+  <text x="630" y="235" class="label" text-anchor="middle" fill="white">Payment Service</text>
+  <text x="630" y="250" class="sublabel" text-anchor="middle" fill="white">3 pods</text>
+  <text x="630" y="275" class="sublabel" text-anchor="middle" fill="white">Stripe/PayPal</text>
+
+  <!-- Notification Service -->
+  <rect x="720" y="210" width="120" height="80" rx="5" class="container"/>
+  <text x="780" y="235" class="label" text-anchor="middle" fill="white">Notification</text>
+  <text x="780" y="250" class="sublabel" text-anchor="middle" fill="white">2 pods</text>
+  <text x="780" y="275" class="sublabel" text-anchor="middle" fill="white">Email/SMS</text>
+
+  <!-- Analytics Service -->
+  <rect x="370" y="330" width="120" height="80" rx="5" class="container"/>
+  <text x="430" y="355" class="label" text-anchor="middle" fill="white">Analytics</text>
+  <text x="430" y="370" class="sublabel" text-anchor="middle" fill="white">2 pods</text>
+  <text x="430" y="395" class="sublabel" text-anchor="middle" fill="white">Tracking</text>
+
+  <!-- Pub/Sub -->
+  <rect x="720" y="330" width="120" height="80" rx="5" class="messaging"/>
+  <text x="780" y="360" class="label" text-anchor="middle" fill="white">Cloud Pub/Sub</text>
+  <text x="780" y="380" class="sublabel" text-anchor="middle" fill="white">Event Bus</text>
+
+  <!-- Cloud SQL -->
+  <rect x="120" y="480" width="140" height="70" rx="5" class="database"/>
+  <text x="190" y="510" class="label" text-anchor="middle" fill="white">Cloud SQL</text>
+  <text x="190" y="530" class="sublabel" text-anchor="middle" fill="white">PostgreSQL</text>
+  <text x="190" y="545" class="sublabel" text-anchor="middle" fill="white">db-n1-standard-4</text>
+
+  <!-- Firestore -->
+  <rect x="290" y="480" width="140" height="70" rx="5" class="database"/>
+  <text x="360" y="510" class="label" text-anchor="middle" fill="white">Firestore</text>
+  <text x="360" y="530" class="sublabel" text-anchor="middle" fill="white">Product Catalog</text>
+
+  <!-- Redis (Memorystore) -->
+  <rect x="460" y="480" width="140" height="70" rx="5" class="database"/>
+  <text x="530" y="510" class="label" text-anchor="middle" fill="white">Memorystore</text>
+  <text x="530" y="530" class="sublabel" text-anchor="middle" fill="white">Redis Cache</text>
+  <text x="530" y="545" class="sublabel" text-anchor="middle" fill="white">5GB M2</text>
+
+  <!-- Cloud Storage -->
+  <rect x="630" y="480" width="140" height="70" rx="5" class="storage"/>
+  <text x="700" y="510" class="label" text-anchor="middle" fill="white">Cloud Storage</text>
+  <text x="700" y="530" class="sublabel" text-anchor="middle" fill="white">Product Images</text>
+
+  <!-- BigQuery -->
+  <rect x="800" y="480" width="140" height="70" rx="5" class="database"/>
+  <text x="870" y="510" class="label" text-anchor="middle" fill="white">BigQuery</text>
+  <text x="870" y="530" class="sublabel" text-anchor="middle" fill="white">Analytics Data</text>
+
+  <!-- Arrows -->
+  <path d="M 500 130 L 480 210" class="arrow"/>
+  <path d="M 180 290 L 190 480" class="arrow"/>
+  <path d="M 330 290 L 360 480" class="arrow"/>
+  <path d="M 480 290 L 530 480" class="arrow"/>
+  <path d="M 630 290 L 780 330" class="arrow"/>
+  <path d="M 780 290 L 780 330" class="arrow"/>
+  <path d="M 430 410 L 870 480" class="arrow"/>
+  <path d="M 630 290 L 700 480" class="arrow"/>
+
+  <!-- Context Notes -->
+  <text x="500" y="630" class="label" text-anchor="middle" fill="#5F6368">Traffic: 50K daily users | 500 req/sec peak</text>
+  <text x="500" y="660" class="sublabel" text-anchor="middle" fill="#EA4335">Expected Cost: High | Confidence: Medium (needs traffic details)</text>
+</svg>

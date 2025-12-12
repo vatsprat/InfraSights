@@ -1,0 +1,137 @@
+<svg width="1000" height="700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font: bold 24px sans-serif; fill: #0078D4; }
+      .label { font: 12px sans-serif; fill: #000; }
+      .sublabel { font: 10px sans-serif; fill: #666; }
+      .ingestion { fill: #0078D4; stroke: #000; stroke-width: 2; }
+      .processing { fill: #00BCF2; stroke: #000; stroke-width: 2; }
+      .storage { fill: #50E6FF; stroke: #000; stroke-width: 2; }
+      .analytics { fill: #FFB900; stroke: #000; stroke-width: 2; }
+      .ml { fill: #7FBA00; stroke: #000; stroke-width: 2; }
+      .arrow { stroke: #666; stroke-width: 2.5; fill: none; marker-end: url(#arrow4); }
+    </style>
+    <marker id="arrow4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="500" y="40" class="title" text-anchor="middle">Real-time Data Analytics Pipeline - Azure</text>
+
+  <!-- Data Sources -->
+  <rect x="50" y="100" width="120" height="60" rx="5" fill="#7FBA00" stroke="#000" stroke-width="2"/>
+  <text x="110" y="125" class="label" text-anchor="middle">IoT Devices</text>
+  <text x="110" y="145" class="sublabel" text-anchor="middle">50K sensors</text>
+
+  <rect x="50" y="200" width="120" height="60" rx="5" fill="#7FBA00" stroke="#000" stroke-width="2"/>
+  <text x="110" y="225" class="label" text-anchor="middle">Mobile Apps</text>
+  <text x="110" y="245" class="sublabel" text-anchor="middle">User events</text>
+
+  <rect x="50" y="300" width="120" height="60" rx="5" fill="#7FBA00" stroke="#000" stroke-width="2"/>
+  <text x="110" y="325" class="label" text-anchor="middle">Web APIs</text>
+  <text x="110" y="345" class="sublabel" text-anchor="middle">3rd party data</text>
+
+  <!-- Event Hub -->
+  <rect x="220" y="180" width="140" height="100" rx="5" class="ingestion"/>
+  <text x="290" y="215" class="label" text-anchor="middle" fill="white">Event Hub</text>
+  <text x="290" y="235" class="sublabel" text-anchor="middle" fill="white">Standard Tier</text>
+  <text x="290" y="255" class="sublabel" text-anchor="middle" fill="white">20 partitions</text>
+
+  <!-- Stream Analytics -->
+  <rect x="410" y="90" width="150" height="80" rx="5" class="processing"/>
+  <text x="485" y="120" class="label" text-anchor="middle" fill="white">Stream Analytics</text>
+  <text x="485" y="140" class="sublabel" text-anchor="middle" fill="white">6 SUs</text>
+  <text x="485" y="155" class="sublabel" text-anchor="middle" fill="white">Real-time processing</text>
+
+  <!-- Azure Functions -->
+  <rect x="410" y="200" width="150" height="80" rx="5" class="processing"/>
+  <text x="485" y="230" class="label" text-anchor="middle" fill="white">Azure Functions</text>
+  <text x="485" y="250" class="sublabel" text-anchor="middle" fill="white">Premium Plan</text>
+  <text x="485" y="265" class="sublabel" text-anchor="middle" fill="white">Data transformation</text>
+
+  <!-- Databricks -->
+  <rect x="410" y="310" width="150" height="80" rx="5" class="ml"/>
+  <text x="485" y="340" class="label" text-anchor="middle" fill="white">Databricks</text>
+  <text x="485" y="360" class="sublabel" text-anchor="middle" fill="white">Standard_DS3_v2</text>
+  <text x="485" y="375" class="sublabel" text-anchor="middle" fill="white">4 worker nodes</text>
+
+  <!-- Data Lake Storage Gen2 -->
+  <rect x="610" y="90" width="160" height="100" rx="5" class="storage"/>
+  <text x="690" y="125" class="label" text-anchor="middle">Data Lake Gen2</text>
+  <text x="690" y="145" class="sublabel" text-anchor="middle">Hot: 500GB</text>
+  <text x="690" y="160" class="sublabel" text-anchor="middle">Cool: 2TB</text>
+  <text x="690" y="175" class="sublabel" text-anchor="middle">Archive: 10TB</text>
+
+  <!-- Cosmos DB -->
+  <rect x="610" y="220" width="160" height="80" rx="5" class="storage"/>
+  <text x="690" y="250" class="label" text-anchor="middle">Cosmos DB</text>
+  <text x="690" y="270" class="sublabel" text-anchor="middle">SQL API</text>
+  <text x="690" y="285" class="sublabel" text-anchor="middle">10K RU/s</text>
+
+  <!-- SQL Database -->
+  <rect x="610" y="330" width="160" height="80" rx="5" class="storage"/>
+  <text x="690" y="360" class="label" text-anchor="middle">SQL Database</text>
+  <text x="690" y="380" class="sublabel" text-anchor="middle">General Purpose</text>
+  <text x="690" y="395" class="sublabel" text-anchor="middle">8 vCores, 500GB</text>
+
+  <!-- Synapse Analytics -->
+  <rect x="610" y="440" width="160" height="100" rx="5" class="analytics"/>
+  <text x="690" y="475" class="label" text-anchor="middle">Synapse Analytics</text>
+  <text x="690" y="495" class="sublabel" text-anchor="middle">DW1000c</text>
+  <text x="690" y="510" class="sublabel" text-anchor="middle">Data Warehouse</text>
+  <text x="690" y="525" class="sublabel" text-anchor="middle">Paused 16h/day</text>
+
+  <!-- Power BI -->
+  <rect x="810" y="90" width="140" height="80" rx="5" class="analytics"/>
+  <text x="880" y="120" class="label" text-anchor="middle">Power BI</text>
+  <text x="880" y="140" class="sublabel" text-anchor="middle">Premium P1</text>
+  <text x="880" y="155" class="sublabel" text-anchor="middle">Dashboards</text>
+
+  <!-- Machine Learning -->
+  <rect x="810" y="200" width="140" height="80" rx="5" class="ml"/>
+  <text x="880" y="230" class="label" text-anchor="middle">ML Studio</text>
+  <text x="880" y="250" class="sublabel" text-anchor="middle">Training</text>
+  <text x="880" y="265" class="sublabel" text-anchor="middle">Standard_NC6</text>
+
+  <!-- Cognitive Services -->
+  <rect x="810" y="310" width="140" height="80" rx="5" class="ml"/>
+  <text x="880" y="340" class="label" text-anchor="middle">Cognitive Services</text>
+  <text x="880" y="360" class="sublabel" text-anchor="middle">Text Analytics</text>
+  <text x="880" y="375" class="sublabel" text-anchor="middle">100K trans/mo</text>
+
+  <!-- Redis Cache -->
+  <rect x="220" y="420" width="140" height="70" rx="5" class="storage"/>
+  <text x="290" y="450" class="label" text-anchor="middle">Redis Cache</text>
+  <text x="290" y="470" class="sublabel" text-anchor="middle">Premium P1</text>
+
+  <!-- Service Bus -->
+  <rect x="220" y="320" width="140" height="70" rx="5" class="ingestion"/>
+  <text x="290" y="350" class="label" text-anchor="middle" fill="white">Service Bus</text>
+  <text x="290" y="370" class="sublabel" text-anchor="middle" fill="white">Premium tier</text>
+
+  <!-- Arrows -->
+  <path d="M 170 130 L 220 230" class="arrow"/>
+  <path d="M 170 230 L 220 230" class="arrow"/>
+  <path d="M 170 330 L 220 230" class="arrow"/>
+
+  <path d="M 360 230 L 410 130" class="arrow"/>
+  <path d="M 360 230 L 410 240" class="arrow"/>
+  <path d="M 360 230 L 410 350" class="arrow"/>
+
+  <path d="M 560 130 L 610 140" class="arrow"/>
+  <path d="M 560 240 L 610 260" class="arrow"/>
+  <path d="M 560 350 L 610 370" class="arrow"/>
+
+  <path d="M 770 140 L 810 130" class="arrow"/>
+  <path d="M 770 140 L 810 240" class="arrow"/>
+  <path d="M 770 260 L 810 350" class="arrow"/>
+
+  <path d="M 690 440 L 690 410" class="arrow"/>
+  <path d="M 360 355 L 410 350" class="arrow"/>
+  <path d="M 360 280 L 360 320" class="arrow"/>
+
+  <!-- Context -->
+  <text x="500" y="640" class="label" text-anchor="middle" fill="#0078D4">Real-time Analytics | 2M events/day | 24/7 processing</text>
+  <text x="500" y="670" class="sublabel" text-anchor="middle" fill="#E81123">Expected Cost: Very High | Confidence: Medium (complex architecture)</text>
+</svg>

@@ -1,0 +1,67 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font: bold 24px sans-serif; fill: #232F3E; }
+      .label { font: 14px sans-serif; fill: #232F3E; }
+      .sublabel { font: 11px sans-serif; fill: #666; }
+      .service-box { fill: #FF9900; stroke: #232F3E; stroke-width: 2; }
+      .db-box { fill: #527FFF; stroke: #232F3E; stroke-width: 2; }
+      .storage-box { fill: #569A31; stroke: #232F3E; stroke-width: 2; }
+      .network-box { fill: #8C4FFF; stroke: #232F3E; stroke-width: 2; }
+      .arrow { stroke: #232F3E; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#232F3E" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="40" class="title" text-anchor="middle">Simple 3-Tier Web Application - AWS</text>
+
+  <!-- Users -->
+  <circle cx="100" cy="150" r="30" fill="#34A853" stroke="#232F3E" stroke-width="2"/>
+  <text x="100" y="155" class="label" text-anchor="middle" fill="white">Users</text>
+
+  <!-- CloudFront CDN -->
+  <rect x="220" y="120" width="140" height="60" rx="5" class="network-box"/>
+  <text x="290" y="145" class="label" text-anchor="middle" fill="white">CloudFront</text>
+  <text x="290" y="165" class="sublabel" text-anchor="middle" fill="white">CDN</text>
+
+  <!-- ALB -->
+  <rect x="220" y="230" width="140" height="60" rx="5" class="network-box"/>
+  <text x="290" y="255" class="label" text-anchor="middle" fill="white">ALB</text>
+  <text x="290" y="275" class="sublabel" text-anchor="middle" fill="white">Load Balancer</text>
+
+  <!-- EC2 Instances -->
+  <rect x="220" y="340" width="60" height="80" rx="5" class="service-box"/>
+  <text x="250" y="370" class="label" text-anchor="middle" fill="white">EC2</text>
+  <text x="250" y="390" class="sublabel" text-anchor="middle" fill="white">t3.medium</text>
+  <text x="250" y="410" class="sublabel" text-anchor="middle" fill="white">x2</text>
+
+  <rect x="300" y="340" width="60" height="80" rx="5" class="service-box"/>
+  <text x="330" y="370" class="label" text-anchor="middle" fill="white">EC2</text>
+  <text x="330" y="390" class="sublabel" text-anchor="middle" fill="white">t3.medium</text>
+  <text x="330" y="410" class="sublabel" text-anchor="middle" fill="white">x2</text>
+
+  <!-- RDS Database -->
+  <rect x="480" y="340" width="140" height="80" rx="5" class="db-box"/>
+  <text x="550" y="370" class="label" text-anchor="middle" fill="white">RDS MySQL</text>
+  <text x="550" y="390" class="sublabel" text-anchor="middle" fill="white">db.t3.small</text>
+  <text x="550" y="410" class="sublabel" text-anchor="middle" fill="white">Multi-AZ</text>
+
+  <!-- S3 Storage -->
+  <rect x="480" y="460" width="140" height="60" rx="5" class="storage-box"/>
+  <text x="550" y="485" class="label" text-anchor="middle" fill="white">S3 Bucket</text>
+  <text x="550" y="505" class="sublabel" text-anchor="middle" fill="white">Static Assets</text>
+
+  <!-- Arrows -->
+  <path d="M 130 150 L 220 150" class="arrow"/>
+  <path d="M 290 180 L 290 230" class="arrow"/>
+  <path d="M 290 290 L 250 340" class="arrow"/>
+  <path d="M 290 290 L 330 340" class="arrow"/>
+  <path d="M 360 380 L 480 380" class="arrow"/>
+  <path d="M 360 390 L 480 490" class="arrow"/>
+
+  <!-- Cost Hint -->
+  <text x="400" y="580" class="sublabel" text-anchor="middle" fill="#666">Expected Cost: Low-Medium | Confidence: High</text>
+</svg>

@@ -1,0 +1,112 @@
+<svg width="900" height="650" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font: bold 24px sans-serif; fill: #232F3E; }
+      .label { font: 13px sans-serif; fill: #232F3E; }
+      .sublabel { font: 10px sans-serif; fill: #666; }
+      .lambda { fill: #FF9900; stroke: #232F3E; stroke-width: 2; }
+      .api { fill: #8C4FFF; stroke: #232F3E; stroke-width: 2; }
+      .database { fill: #527FFF; stroke: #232F3E; stroke-width: 2; }
+      .storage { fill: #569A31; stroke: #232F3E; stroke-width: 2; }
+      .queue { fill: #E7157B; stroke: #232F3E; stroke-width: 2; }
+      .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrow3); }
+    </style>
+    <marker id="arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="40" class="title" text-anchor="middle">Serverless SaaS Application - AWS</text>
+
+  <!-- Mobile/Web Clients -->
+  <rect x="50" y="150" width="100" height="50" rx="5" fill="#34A853" stroke="#232F3E" stroke-width="2"/>
+  <text x="100" y="175" class="label" text-anchor="middle" fill="white">Web/Mobile</text>
+  <text x="100" y="190" class="sublabel" text-anchor="middle" fill="white">Clients</text>
+
+  <!-- CloudFront -->
+  <rect x="200" y="80" width="120" height="60" rx="5" class="api"/>
+  <text x="260" y="105" class="label" text-anchor="middle" fill="white">CloudFront</text>
+  <text x="260" y="125" class="sublabel" text-anchor="middle" fill="white">Global CDN</text>
+
+  <!-- API Gateway -->
+  <rect x="200" y="220" width="120" height="60" rx="5" class="api"/>
+  <text x="260" y="245" class="label" text-anchor="middle" fill="white">API Gateway</text>
+  <text x="260" y="265" class="sublabel" text-anchor="middle" fill="white">REST API</text>
+
+  <!-- S3 Static Hosting -->
+  <rect x="360" y="80" width="120" height="60" rx="5" class="storage"/>
+  <text x="420" y="105" class="label" text-anchor="middle" fill="white">S3 Bucket</text>
+  <text x="420" y="125" class="sublabel" text-anchor="middle" fill="white">React App</text>
+
+  <!-- Lambda Functions -->
+  <rect x="380" y="200" width="100" height="50" rx="5" class="lambda"/>
+  <text x="430" y="220" class="label" text-anchor="middle" fill="white">Lambda</text>
+  <text x="430" y="235" class="sublabel" text-anchor="middle" fill="white">Auth Service</text>
+
+  <rect x="380" y="270" width="100" height="50" rx="5" class="lambda"/>
+  <text x="430" y="290" class="label" text-anchor="middle" fill="white">Lambda</text>
+  <text x="430" y="305" class="sublabel" text-anchor="middle" fill="white">User API</text>
+
+  <rect x="380" y="340" width="100" height="50" rx="5" class="lambda"/>
+  <text x="430" y="360" class="label" text-anchor="middle" fill="white">Lambda</text>
+  <text x="430" y="375" class="sublabel" text-anchor="middle" fill="white">Data API</text>
+
+  <rect x="380" y="410" width="100" height="50" rx="5" class="lambda"/>
+  <text x="430" y="430" class="label" text-anchor="middle" fill="white">Lambda</text>
+  <text x="430" y="445" class="sublabel" text-anchor="middle" fill="white">File Processor</text>
+
+  <!-- Cognito -->
+  <rect x="540" y="190" width="120" height="60" rx="5" fill="#DD344C" stroke="#232F3E" stroke-width="2"/>
+  <text x="600" y="215" class="label" text-anchor="middle" fill="white">Cognito</text>
+  <text x="600" y="235" class="sublabel" text-anchor="middle" fill="white">User Pool</text>
+
+  <!-- DynamoDB -->
+  <rect x="540" y="280" width="120" height="60" rx="5" class="database"/>
+  <text x="600" y="305" class="label" text-anchor="middle" fill="white">DynamoDB</text>
+  <text x="600" y="325" class="sublabel" text-anchor="middle" fill="white">NoSQL DB</text>
+
+  <!-- S3 Data Lake -->
+  <rect x="540" y="370" width="120" height="60" rx="5" class="storage"/>
+  <text x="600" y="395" class="label" text-anchor="middle" fill="white">S3 Bucket</text>
+  <text x="600" y="415" class="sublabel" text-anchor="middle" fill="white">Data Storage</text>
+
+  <!-- SQS Queue -->
+  <rect x="540" y="460" width="120" height="60" rx="5" class="queue"/>
+  <text x="600" y="485" class="label" text-anchor="middle" fill="white">SQS Queue</text>
+  <text x="600" y="505" class="sublabel" text-anchor="middle" fill="white">Async Tasks</text>
+
+  <!-- EventBridge -->
+  <rect x="200" y="380" width="120" height="60" rx="5" class="queue"/>
+  <text x="260" y="405" class="label" text-anchor="middle" fill="white">EventBridge</text>
+  <text x="260" y="425" class="sublabel" text-anchor="middle" fill="white">Event Bus</text>
+
+  <!-- Step Functions -->
+  <rect x="200" y="480" width="120" height="60" rx="5" fill="#CD2264" stroke="#232F3E" stroke-width="2"/>
+  <text x="260" y="505" class="label" text-anchor="middle" fill="white">Step Functions</text>
+  <text x="260" y="525" class="sublabel" text-anchor="middle" fill="white">Workflows</text>
+
+  <!-- SNS -->
+  <rect x="700" y="370" width="120" height="60" rx="5" class="queue"/>
+  <text x="760" y="395" class="label" text-anchor="middle" fill="white">SNS</text>
+  <text x="760" y="415" class="sublabel" text-anchor="middle" fill="white">Notifications</text>
+
+  <!-- Arrows -->
+  <path d="M 150 175 L 200 110" class="arrow"/>
+  <path d="M 150 175 L 200 250" class="arrow"/>
+  <path d="M 320 110 L 360 110" class="arrow"/>
+  <path d="M 320 250 L 380 225" class="arrow"/>
+  <path d="M 320 250 L 380 295" class="arrow"/>
+  <path d="M 320 250 L 380 365" class="arrow"/>
+  <path d="M 480 225 L 540 220" class="arrow"/>
+  <path d="M 480 295 L 540 310" class="arrow"/>
+  <path d="M 480 365 L 540 400" class="arrow"/>
+  <path d="M 480 435 L 540 490" class="arrow"/>
+  <path d="M 320 410 L 380 435" class="arrow"/>
+  <path d="M 260 440 L 260 480" class="arrow"/>
+  <path d="M 660 400 L 700 400" class="arrow"/>
+
+  <!-- Context -->
+  <text x="450" y="600" class="label" text-anchor="middle" fill="#666">B2B SaaS | 5,000 monthly active users | 1M Lambda invocations/month</text>
+  <text x="450" y="630" class="sublabel" text-anchor="middle" fill="#DD344C">Expected Cost: Low-Medium | Confidence: High (well-defined usage)</text>
+</svg>
